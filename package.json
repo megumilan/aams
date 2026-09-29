@@ -1,0 +1,46 @@
+{
+    "name": "aams",
+    "version": "0.0.0",
+    "private": true,
+    "description": "Academic Affairs Management System",
+    "license": "MIT",
+    "author": "megumilan",
+    "type": "module",
+    "scripts": {
+        "build": "pnpm -r build",
+        "check": "biome check .",
+        "db:generate": "pnpm --filter @aams/server db:generate",
+        "db:migrate": "pnpm --filter @aams/server db:migrate",
+        "db:push": "pnpm --filter @aams/server db:push",
+        "db:seed": "pnpm --filter @aams/server db:seed",
+        "db:studio": "pnpm --filter @aams/server db:studio",
+        "dev": "pnpm -r --parallel dev",
+        "dev:server": "pnpm --filter @aams/server dev",
+        "dev:web": "pnpm --filter @aams/web dev",
+        "format": "biome check --write .",
+        "lint": "biome lint .",
+        "lint:fix": "biome lint --write .",
+        "prepare": "husky",
+        "test": "pnpm -r test",
+        "typecheck": "pnpm -r typecheck"
+    },
+    "lint-staged": {
+        "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css}": [
+            "biome lint --no-errors-on-unmatched --error-on-warnings"
+        ],
+        "*": [
+            "biome check --no-errors-on-unmatched --error-on-warnings --files-ignore-unknown=true"
+        ]
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.5.12",
+        "@types/node": "^26.5.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^17.6.0",
+        "typescript": "^5.9.3"
+    },
+    "packageManager": "pnpm@10.34.4",
+    "engines": {
+        "node": ">=24.12.0"
+    }
+}

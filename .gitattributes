@@ -1,0 +1,16 @@
+# Normalize line endings in the repository; check out with LF everywhere.
+# Matches `end_of_line = lf` in .editorconfig, and keeps the husky hooks
+# executable — a CRLF `.husky/pre-commit` fails with "lint-staged: not found"
+# on a fresh clone, because core.autocrlf=true on Windows rewrites it.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.gz binary
