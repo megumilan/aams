@@ -1,5 +1,7 @@
 import 'dotenv/config'
 
+import { openapi } from '@express-zod/openapi'
+import cors from 'cors'
 import type { ErrorRequestHandler } from 'express-zod'
 import { Router } from 'express-zod'
 import { z } from 'zod'
@@ -17,6 +19,16 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 }
 
 const app = new Router({ prefix: '/api' })
+    .use(cors({ origin: '*' }))
+    .use(
+        openapi({
+            openapi: '3.0.1',
+            info: {
+                title: 'AAMS Docs',
+                version: '0.0.1',
+            },
+        }),
+    )
     .get(
         '/health',
         {
@@ -48,4 +60,7 @@ const app = new Router({ prefix: '/api' })
 
 app.listen(port, () => {
     console.log(`AAMS server listening on http://localhost:${port}`)
+    console.log(`Docs http://localhost:${port}/openapi`)
 })
+
+export type App = typeof app

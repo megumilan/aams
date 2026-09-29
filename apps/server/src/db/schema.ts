@@ -1,4 +1,5 @@
 import { ROLES } from '@aams/shared'
+import { createId } from '@paralleldrive/cuid2'
 import { sql } from 'drizzle-orm'
 import {
     boolean,
@@ -16,9 +17,8 @@ export const USER_STATUSES = ['active', 'disabled'] as const
 export const users = mysqlTable(
     'users',
     {
-        id: int('id', { unsigned: true }).primaryKey().autoincrement(),
+        id: varchar('id', { length: 255 }).primaryKey().$defaultFn(createId),
         username: varchar('username', { length: 32 }).notNull(),
-        passwordHash: varchar('password_hash', { length: 255 }).notNull(),
         name: varchar('name', { length: 64 }).notNull(),
         email: varchar('email', { length: 128 }),
         phone: varchar('phone', { length: 20 }),
